@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Custom Picker Wheel</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <div class="main-container">
+        <div class="sidebar">
+            <h2>Inputs</h2>
+            <p>Put each value on a new line</p>
+            <textarea id="nameInput" placeholder="Enter names here...">Ved
+Purvaj
+Siddhant
+Sanskar
+Divyesh</textarea>
+
+            <div class="controls">
+                <input type="text" id="riggedInput" placeholder="Rigged Name (Optional)"
+                    style="margin-bottom: 10px; width: 100%; padding: 5px; display:none;">
+                <button id="spinBtn">SPIN</button>
+            </div>
+        </div>
+
+        <div class="wheel-stage">
+            <div class="arrow"></div>
+            <canvas id="wheelCanvas" width="600" height="600"></canvas>
+            <div id="winnerModal" class="modal hidden">
+                <div class="modal-content">
+                    <h2>We have a winner!</h2>
+                    <h1 id="winnerText">...</h1>
+                    <button onclick="closeModal()">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,160 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background-color: #b0b9a8;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.main-container {
+    display: flex;
+    width: 90%;
+    max-width: 1000px;
+    background: white;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    border-radius: 12px;
+    overflow: hidden;
+    height: 80vh;
+}
+
+/* Sidebar Styling */
+.sidebar {
+    width: 300px;
+    padding: 20px;
+    background-color: #ffffff;
+    border-right: 1px solid #e0e0e0;
+    display: flex;
+    flex-direction: column;
+}
+
+.sidebar h2 {
+    color: #333;
+    margin-bottom: 5px;
+}
+
+.sidebar p {
+    color: #777;
+    font-size: 12px;
+    margin-bottom: 15px;
+}
+
+textarea {
+    width: 100%;
+    flex-grow: 1;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    resize: none;
+    font-size: 14px;
+    outline: none;
+    background: #f9f9f9;
+}
+
+#spinBtn {
+    margin-top: 15px;
+    width: 100%;
+    padding: 15px;
+    background: #ff5252;
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+#spinBtn:hover {
+    background: #ff1744;
+}
+
+/* Wheel Stage Styling */
+.wheel-stage {
+    flex-grow: 1;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #fff;
+}
+
+#wheelCanvas {
+    max-width: 90%;
+    max-height: 90%;
+}
+
+/* The Pointer Arrow */
+.arrow {
+    position: absolute;
+    top: 50%;
+    right: 40px;
+    /* Position on the right side */
+    transform: translateY(-50%);
+    width: 0;
+    height: 0;
+    border-top: 20px solid transparent;
+    border-bottom: 20px solid transparent;
+    border-right: 40px solid #333;
+    z-index: 10;
+}
+
+/* Modal Styling */
+.modal {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 20;
+}
+
+.hidden {
+    display: none;
+}
+
+.modal-content {
+    background: white;
+    padding: 40px;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    animation: popIn 0.3s ease;
+}
+
+.modal-content h1 {
+    color: #ff5252;
+    font-size: 3rem;
+    margin: 20px 0;
+}
+
+.modal-content button {
+    padding: 10px 30px;
+    border: none;
+    background: #333;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+@keyframes popIn {
+    from {
+        transform: scale(0.8);
+        opacity: 0;
+    }
+
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
