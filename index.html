@@ -4,37 +4,54 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Custom Picker Wheel</title>
+    <title>Modern Picker Wheel</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
+    <header class="mobile-header">
+        <h1>Picker Wheel</h1>
+        <button id="menuToggle" aria-label="Toggle Menu">☰</button>
+    </header>
+
     <div class="main-container">
-        <div class="sidebar">
-            <h2>Inputs</h2>
-            <p>Put each value on a new line</p>
-            <textarea id="nameInput" placeholder="Enter names here...">Ved
-Purvaj
-Siddhant
+
+        <div class="menu-overlay" id="menuOverlay"></div>
+
+        <div class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <h2>Inputs</h2>
+                <button class="close-menu" id="closeMenu">×</button>
+            </div>
+            <p class="subtitle">Enter each choice on a new line.</p>
+
+            <div class="input-group">
+                <textarea id="nameInput" placeholder="e.g.&#10;Pizza&#10;Burger&#10;Sushi">
+Ved
 Sanskar
-Divyesh</textarea>
+Divyesh
+Purvaj
+Siddhant</textarea>
+            </div>
 
             <div class="controls">
-                <input type="text" id="riggedInput" placeholder="Rigged Name (Optional)"
-                    style="margin-bottom: 10px; width: 100%; padding: 5px; display:none;">
-                <button id="spinBtn">SPIN</button>
+                <button id="spinBtn">SPIN THE WHEEL</button>
             </div>
         </div>
 
         <div class="wheel-stage">
-            <div class="arrow"></div>
-            <canvas id="wheelCanvas" width="600" height="600"></canvas>
+            <div class="wheel-container">
+                <div class="pointer"></div>
+                <canvas id="wheelCanvas" width="800" height="800"></canvas>
+            </div>
+
             <div id="winnerModal" class="modal hidden">
                 <div class="modal-content">
-                    <h2>We have a winner!</h2>
+                    <h2>🎉 We have a winner! 🎉</h2>
                     <h1 id="winnerText">...</h1>
-                    <button onclick="closeModal()">Close</button>
+                    <button onclick="closeModal()">Awesome!</button>
                 </div>
             </div>
         </div>
