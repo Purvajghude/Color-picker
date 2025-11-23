@@ -1,160 +1,324 @@
+:root {
+    --primary-color: #7c5f00;
+    --secondary-color: #af9e00;
+    --bg-color: #F0F2F5;
+    --text-dark: #333;
+    --text-light: #777;
+    --sidebar-width: 350px;
+}
+
 * {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 body {
-    background-color: #b0b9a8;
+    font-family: 'Poppins', sans-serif;
+    background-color: var(--bg-color);
     height: 100vh;
     display: flex;
-    align-items: center;
-    justify-content: center;
+    flex-direction: column;
+    overflow: hidden;
 }
 
+/* --- Mobile Header --- */
+.mobile-header {
+    display: none;
+    /* Hidden on desktop */
+    padding: 15px 20px;
+    background: white;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    justify-content: space-between;
+    align-items: center;
+    z-index: 100;
+}
+
+.mobile-header h1 {
+    font-size: 1.2rem;
+    color: var(--text-dark);
+}
+
+#menuToggle {
+    background: none;
+    border: none;
+    font-size: 1.8rem;
+    cursor: pointer;
+}
+
+/* --- Main Layout --- */
 .main-container {
     display: flex;
-    width: 90%;
-    max-width: 1000px;
-    background: white;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-    border-radius: 12px;
-    overflow: hidden;
-    height: 80vh;
+    flex-grow: 1;
+    height: 100%;
+    position: relative;
 }
 
-/* Sidebar Styling */
+/* --- Sidebar Styling --- */
 .sidebar {
-    width: 300px;
-    padding: 20px;
+    width: var(--sidebar-width);
     background-color: #ffffff;
-    border-right: 1px solid #e0e0e0;
+    padding: 30px;
     display: flex;
     flex-direction: column;
+    box-shadow: 5px 0 15px rgba(0, 0, 0, 0.05);
+    z-index: 200;
+    transition: transform 0.3s ease-in-out;
 }
 
-.sidebar h2 {
-    color: #333;
+.sidebar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     margin-bottom: 5px;
 }
 
-.sidebar p {
-    color: #777;
-    font-size: 12px;
-    margin-bottom: 15px;
+.sidebar h2 {
+    color: var(--text-dark);
+    font-weight: 700;
+}
+
+.close-menu {
+    display: none;
+    background: none;
+    border: none;
+    font-size: 2rem;
+    cursor: pointer;
+}
+
+.subtitle {
+    color: var(--text-light);
+    font-size: 0.9rem;
+    margin-bottom: 20px;
+}
+
+.input-group {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
 }
 
 textarea {
-    width: 100%;
     flex-grow: 1;
-    padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 8px;
+    width: 100%;
+    padding: 15px;
+    border: 2px solid #eee;
+    border-radius: 12px;
     resize: none;
-    font-size: 14px;
+    font-size: 1rem;
+    font-family: inherit;
     outline: none;
-    background: #f9f9f9;
+    background: #fafafa;
+    transition: border-color 0.2s;
+    margin-bottom: 20px;
+}
+
+textarea:focus {
+    border-color: var(--primary-color);
+    background: white;
 }
 
 #spinBtn {
-    margin-top: 15px;
     width: 100%;
-    padding: 15px;
-    background: #ff5252;
+    padding: 18px;
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
     color: white;
-    font-size: 18px;
-    font-weight: bold;
+    font-size: 1.1rem;
+    font-weight: 700;
     border: none;
-    border-radius: 8px;
+    border-radius: 12px;
     cursor: pointer;
-    transition: background 0.2s;
+    box-shadow: 0 10px 20px -10px rgba(108, 99, 255, 0.5);
+    transition: transform 0.2s, box-shadow 0.2s;
 }
 
 #spinBtn:hover {
-    background: #ff1744;
+    transform: translateY(-3px);
+    box-shadow: 0 15px 30px -10px rgba(108, 99, 255, 0.7);
 }
 
-/* Wheel Stage Styling */
+#spinBtn:active {
+    transform: translateY(1px);
+}
+
+/* --- Wheel Stage Styling --- */
 .wheel-stage {
     flex-grow: 1;
-    position: relative;
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #fff;
+    position: relative;
+    padding: 20px;
+    background-color: var(--bg-color);
+    overflow: hidden;
+}
+
+.wheel-container {
+    position: relative;
+    width: 90%;
+    max-width: 600px;
+    aspect-ratio: 1 / 1;
+    /* Keeps it square */
 }
 
 #wheelCanvas {
-    max-width: 90%;
-    max-height: 90%;
+    width: 100%;
+    height: 100%;
+    filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.15));
 }
 
-/* The Pointer Arrow */
-.arrow {
+.pointer {
     position: absolute;
     top: 50%;
-    right: 40px;
-    /* Position on the right side */
+    right: -15px;
     transform: translateY(-50%);
-    width: 0;
-    height: 0;
-    border-top: 20px solid transparent;
-    border-bottom: 20px solid transparent;
-    border-right: 40px solid #333;
+    width: 50px;
+    height: 50px;
+    background-color: #333;
+    clip-path: polygon(100% 50%, 0 0, 0 100%);
     z-index: 10;
+    filter: drop-shadow(-5px 5px 5px rgba(0, 0, 0, 0.2));
 }
 
-/* Modal Styling */
+/* --- Modal --- */
 .modal {
-    position: absolute;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(5px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    opacity: 1;
+    transition: opacity 0.3s;
+}
+
+.modal.hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.modal-content {
+    background: white;
+    padding: 50px;
+    border-radius: 20px;
+    text-align: center;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+    transform: scale(1);
+    transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.modal.hidden .modal-content {
+    transform: scale(0.8);
+}
+
+.modal-content h2 {
+    color: var(--text-light);
+    font-size: 1.2rem;
+}
+
+.modal-content h1 {
+    color: var(--primary-color);
+    font-size: 3rem;
+    margin: 20px 0;
+    font-weight: 800;
+}
+
+.modal-content button {
+    padding: 12px 30px;
+    border: none;
+    background: var(--text-dark);
+    color: white;
+    border-radius: 50px;
+    font-weight: 600;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background 0.2s;
+}
+
+.modal-content button:hover {
+    background: var(--primary-color);
+}
+
+/* --- Overlay for Mobile Menu --- */
+.menu-overlay {
+    position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
     background: rgba(0, 0, 0, 0.5);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 20;
+    z-index: 150;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s;
 }
 
-.hidden {
-    display: none;
+.menu-overlay.active {
+    opacity: 1;
+    pointer-events: auto;
 }
 
-.modal-content {
-    background: white;
-    padding: 40px;
-    border-radius: 10px;
-    text-align: center;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-    animation: popIn 0.3s ease;
-}
-
-.modal-content h1 {
-    color: #ff5252;
-    font-size: 3rem;
-    margin: 20px 0;
-}
-
-.modal-content button {
-    padding: 10px 30px;
-    border: none;
-    background: #333;
-    color: white;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-@keyframes popIn {
-    from {
-        transform: scale(0.8);
-        opacity: 0;
+/* ================= RESPONSIVE DESIGN ================= */
+@media (max-width: 900px) {
+    :root {
+        --sidebar-width: 300px;
     }
 
-    to {
-        transform: scale(1);
-        opacity: 1;
+    .modal-content h1 {
+        font-size: 2.5rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .mobile-header {
+        display: flex;
+    }
+
+    /* Sidebar becomes a slide-out drawer */
+    .sidebar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 100%;
+        transform: translateX(-100%);
+        /* Hide off-screen */
+    }
+
+    .sidebar.active {
+        transform: translateX(0);
+    }
+
+    /* Slide in */
+    .close-menu {
+        display: block;
+    }
+
+    .wheel-stage {
+        padding: 10px;
+    }
+
+    .wheel-container {
+        max-width: 90%;
+    }
+
+    .pointer {
+        width: 40px;
+        height: 40px;
+        right: -10px;
+    }
+
+    .modal-content {
+        padding: 30px;
+        width: 85%;
+    }
+
+    .modal-content h1 {
+        font-size: 2rem;
     }
 }
