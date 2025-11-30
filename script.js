@@ -1,7 +1,7 @@
 // --- RIGGING CONFIGURATION ---
 // Leave empty "" for a fair spin.
 const TARGET_NAME = "Ved";
-const WIN_PERCENTAGE = 70;
+const WIN_PERCENTAGE = 50;
 // -----------------------------
 
 const canvas = document.getElementById('wheelCanvas');
@@ -201,4 +201,5 @@ function closeModal() {
 // Initialize
 resizeCanvas();
 updateNames();
+
 
